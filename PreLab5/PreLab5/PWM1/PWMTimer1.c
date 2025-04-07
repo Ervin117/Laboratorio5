@@ -2,12 +2,12 @@
  * PWMTimer1.c
  *
  * Created: 4/6/2025 9:45:34 PM
- *  Author: razer
+ *  Author: Ervin Gomez 231226
  */ 
 #include "PWMTimer1.h"
 void PWM1A(uint8_t invertido, uint16_t presc)
 {
-	DDRB |= (1 << PORTB1); // OC1A como salida
+	DDRB |= (1 << DDB1); // OC1A como salida
 
 	
 	TCCR1A &= ~((1<<COM1A1) | (1<<COM1A0));
@@ -48,9 +48,7 @@ void PWM1A(uint8_t invertido, uint16_t presc)
 			break;
 	}
 }
-
 void updateDutyCycle1(uint16_t duty)
 {
-	if (duty > ICR1) duty = ICR1;
 	OCR1A = duty;
 }

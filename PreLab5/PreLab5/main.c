@@ -14,8 +14,8 @@
 #include <avr/interrupt.h>
 #include "PWM1/PWMTimer1.h"
 
-//volatile 
-uint16_t duty = 1000; //191
+uint16_t duty = 0; //191
+uint8_t angulo = 0; 
 /****************************************/
 // Function prototypes
 void setup(); 
@@ -30,9 +30,7 @@ int main(void){
 	
 	while (1)
 	{
-		updateDutyCycle1(duty);
-		//duty++;
-		_delay_ms(1);
+		
 	}
 }
 
@@ -43,7 +41,7 @@ void setup()
 	cli(); 
 	CLKPR = (1<<CLKPCE);
 	CLKPR = (1<<CLKPS2); //Frecuancia de CPU 1Mhz
-	PWM1A(invt, 64); 
+	PWM1A(no_invt, 64); 
 	
 	UCSR0B = 0;
 	sei(); 
@@ -63,9 +61,8 @@ void _ADC(void)
 // Interrupt routines
 ISR(ADC_vect)
 {
-	//duty =ADCH;
-	uint8_t adc_value = ADCH;
-	
-	duty = 1000 + ((uint16_t) adc_value * 1000) / 255; // Mapea de 0-255 a 1000-2000
+	angulo = (ADCH*180)/255;
+	duty = 16 + (angulo*(45-16)/180);
+	updateDutyCycle1(duty);
 	ADCSRA |= (1<<ADSC);
 }
