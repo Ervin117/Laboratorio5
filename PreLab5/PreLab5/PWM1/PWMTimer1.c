@@ -24,7 +24,7 @@ void PWM1A(uint8_t invertido, uint16_t presc)
 	TCCR1A |= (1 << WGM11);
 	TCCR1B |= (1 << WGM13) | (1 << WGM12);
 
-	ICR1 = 19999;
+	ICR1 = 312;//19999;
 
 	switch (presc)
 	{

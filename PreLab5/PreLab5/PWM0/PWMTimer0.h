@@ -13,6 +13,6 @@
 #define invt 1
 #define no_invt 0
 void PWM0A(uint8_t invertido, uint16_t presc);
-void updateDutyCycle(uint8_t duty);
+void updateDutyCycle(uint8_t duty0);
 
 #endif /* PWMTIMER0_H_ */

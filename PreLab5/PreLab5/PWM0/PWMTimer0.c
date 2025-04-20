@@ -6,6 +6,7 @@
  */ 
 
 #include "PWMTimer0.h"
+
 void PWM0A(uint8_t invertido, uint16_t presc)
 {
 	DDRD |=(1<< DDD6);
@@ -42,8 +43,9 @@ void PWM0A(uint8_t invertido, uint16_t presc)
 		break;
 	}
 	TCCR0B |= (1 << CS02); //256 de prescaler
+	TIMSK0 |= (1 << TOIE0);
 }
-void updateDutyCycle(uint8_t duty)
+void updateDutyCycle(uint8_t duty0)
 {
-	OCR0A = duty;
+	OCR0A = duty0;
 }
